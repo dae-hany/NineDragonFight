@@ -47,11 +47,23 @@ def play_game():
     match_log = [] 
 
     while player.tiles and ai_player.tiles:
-        print(f"\n{current_player.name}'s turn.")
+        print(f"\n{current_player.name}'의 차례")
         
         tile1 = current_player.choose_tile()
+        if current_player == ai_player: 
+            if tile1.color == 'black':
+                print("ai가 낸 색상 : ⚫️")
+            else:
+                print("ai가 낸 색상 : ⚪️")
+
         other_player = ai_player if current_player == player else player
         tile2 = other_player.choose_tile()
+        if current_player == player: 
+            if tile2.color == 'black':
+                print("ai가 낸 색상 : ⚫️")
+            else:
+                print("ai가 낸 색상 : ⚪️")
+
 
         # 승자 결정 
         winner = determine_winner(tile1, tile2)
