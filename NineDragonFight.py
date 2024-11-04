@@ -70,29 +70,34 @@ def play_game():
 
         # 승자 결정 
         winner = determine_winner(tile1, tile2)
-        if current_player == player and winner == tile1: # current_player 가 player 일 때, player가 승리함 -> 유지 
-            print("User의 라운드 승리")
-            current_player.round_points += 1  
-            current_player = player
-            match_log.append(f"{current_player.name} : {tile1} , {other_player.name} : {tile2}.")
 
-        elif current_player == player and winner == tile2: # current_player 가 player 일 때, ai_player가 승리함 -> 변경 
-            print("AI의 라운드 승리")
-            other_player.round_points += 1
-            current_player = ai_player
-            match_log.append(f"{current_player.name} : {tile1} , {other_player.name} : {tile2}.")
-
-        elif current_player == ai_player and winner == tile1: # current_player 가 ai_player 일 때, ai_player가 승리함 -> 유지 
-            print("AI의 라운드 승리")
+        # 유지 
+        if current_player == player and winner == tile1:
+            print("======User의 승리======")
             current_player.round_points += 1
-            current_player = ai_player 
             match_log.append(f"{current_player.name} : {tile1} , {other_player.name} : {tile2}.")
+            current_player, other_player = player, ai_player
 
-        elif current_player == ai_player and winner == tile2: # current_player 가 ai_player 일 때, player가 승리함 -> 변경 
-            print("User의 라운드 승리")
-            other_player.round_points += 1
-            current_player = player
+        # 변경 
+        elif current_player == player and winner == tile2:
+            print("======AI의 승리======")
+            other_player.round_points += 1   
             match_log.append(f"{current_player.name} : {tile1} , {other_player.name} : {tile2}.")
+            current_player, other_player = ai_player, player
+
+        # 유지 
+        elif current_player == ai_player and winner == tile1:
+            print("======AI의 승리======")
+            current_player.round_points += 1
+            match_log.append(f"{current_player.name} : {tile1} , {other_player.name} : {tile2}.")
+            current_player, other_player = ai_player, player
+
+        # 변경
+        elif current_player == ai_player and winner == tile2:
+            print("======User의 승리======")
+            other_player.round_points += 1
+            match_log.append(f"{current_player.name} : {tile1} , {other_player.name} : {tile2}.")
+            current_player, other_player = player, ai_player
 
         else:
             print("무승부!")
