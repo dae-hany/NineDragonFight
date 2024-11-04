@@ -56,14 +56,17 @@ def play_game():
             else:
                 print("ai가 낸 색상 : ⚪️")
 
-        other_player = ai_player if current_player == player else player
+        if current_player == player:
+            other_player = ai_player 
+        else:
+            other_player = player 
+
         tile2 = other_player.choose_tile()
         if current_player == player: 
             if tile2.color == 'black':
                 print("ai가 낸 색상 : ⚫️")
             else:
                 print("ai가 낸 색상 : ⚪️")
-
 
         # 승자 결정 
         winner = determine_winner(tile1, tile2)
